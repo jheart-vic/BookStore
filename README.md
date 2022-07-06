@@ -38,7 +38,8 @@ Template from this [MICROVERSE](https://www.microverse.org/)
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/jheart-vic/BookStore.git/issues).
+Feel free to check the [issues page](https://github.com/jheart-vic/BookStore.git
+/issues).
 
 ## Contributers
 
