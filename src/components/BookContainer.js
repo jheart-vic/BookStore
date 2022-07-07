@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AddBook from './AddBook';
 import Books from './Books';
 import Category from './Category';
 import NavBar from './NavBar';
@@ -16,7 +15,6 @@ const BookContainer = ({ books }) => (
         <Route path="/" exact element={<Books books={books} />} />
         <Route path="/category" element={<Category />} />
       </Routes>
-      <AddBook />
     </div>
   </Router>
 );
