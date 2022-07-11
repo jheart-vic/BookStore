@@ -6,7 +6,7 @@ import AddBook from './AddBook';
 const Books = ({ books }) => (
   <>
     <ul className="book-content">
-      {books.map((book) => <Book key={book.id} book={book} />)}
+      {books.map((book) => <Book key={book_id} book={book} />)}
     </ul>
     <AddBook />
   </>
