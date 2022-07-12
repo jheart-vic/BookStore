@@ -1,4 +1,4 @@
-const CHECK_STATUS = './Categories/categories';
+const CHECK_STATUS = './Categories/CHECK_STATUS';
 
 const CategoryReducer = (state = [], action) => {
   switch (action.type) {
@@ -10,6 +10,6 @@ const CategoryReducer = (state = [], action) => {
   }
 };
 
-export const categories = (category) => ({ type: CHECK_STATUS, category });
+export const categories = () => ({ type: CHECK_STATUS });
 
 export default CategoryReducer;

@@ -1,15 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AddBook.css';
+import { useDispatch } from 'react-redux';
+import { addBook } from '../redux/Books/books';
 
-const AddBook = () => (
-  <div className="inputContainer">
-    <h2 className="FormText">ADD NEW BOOK</h2>
-    <form action="#">
-      <input type="text" name="title" className="inputTitle" placeholder="Book Title" id="input0" />
-      <input type="text" name="author" className="inputAuthor" placeholder="Book Author" id="input1" />
-      <button type="submit" className="FormBtn">Add Book</button>
-    </form>
-  </div>
-);
+const AddBook = () => {
+  const dispatch = useDispatch();
+  const [book, setBook] = useState({ title: '', author: '' });
+  const handleChange = (e) => {
+    const inputs = e.target.name;
+    if (inputs === 'title') {
+      setBook({ title: e.target.value, author: book.author });
+    }
+    if (inputs === 'author') {
+      setBook({ title: book.title, author: e.target.value });
+    }
+  };
+
+  return (
+    <div className="inputContainer">
+      <h2 className="FormText">ADD NEW BOOK</h2>
+      <form>
+        <input
+          type="text"
+          name="title"
+          className="inputTitle"
+          onChange={handleChange}
+          placeholder="Book Title"
+          id="input0"
+          required
+        />
+        <input
+          type="text"
+          name="author"
+          className="inputAuthor"
+          onChange={handleChange}
+          placeholder="Book Author"
+          id="input1"
+          required
+        />
+        <button
+          type="submit"
+          className="FormBtn"
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch(addBook(book));
+          }}
+        >
+          Add Book
+        </button>
+      </form>
+    </div>
+  );
+};
 
 export default AddBook;

@@ -15,10 +15,10 @@ const Books = ({ books }) => (
 Books.propTypes = {
   books: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
+      id: PropTypes.string,
+      title: PropTypes.string,
+      author: PropTypes.string,
+      category: PropTypes.string,
     }).isRequired,
   ).isRequired,
 };
