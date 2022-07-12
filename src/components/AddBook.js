@@ -16,6 +16,11 @@ const AddBook = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addBook(book));
+  };
+
   return (
     <div className="inputContainer">
       <h2 className="FormText">ADD NEW BOOK</h2>
@@ -41,10 +46,7 @@ const AddBook = () => {
         <button
           type="submit"
           className="FormBtn"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(addBook(book));
-          }}
+          onClick={handleSubmit}
         >
           Add Book
         </button>
