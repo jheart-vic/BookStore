@@ -38,9 +38,7 @@ Template from this [MICROVERSE](https://www.microverse.org/)
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/jheart-vic/BookStore.git/issues).
-
-## Contributers
+Feel free to check the [issues page](https://github.com/jheart-vic/BookStore/issues).
 
 ## Show your support
 
@@ -48,4 +46,4 @@ Give a ⭐️ if you like this project and how we manage to build it!
 
 ## 📝 License
 
-This project is [MIT](./MIT.md) licensed
+This project is [MIT](./MIT.md) licensed.
