@@ -14,6 +14,9 @@ const AddBook = () => {
     if (inputs === 'author') {
       setBook({ title: book.title, author: e.target.value });
     }
+    if (inputs === 'catgory') {
+      setBook({ title: book.title, author: e.target.value });
+    }
   };
 
   return (
@@ -36,6 +39,15 @@ const AddBook = () => {
           onChange={handleChange}
           placeholder="Book Author"
           id="input1"
+          required
+        />
+        <input
+          type="text"
+          name="category"
+          className="inputAuthor"
+          onChange={handleChange}
+          placeholder="category"
+          id="input2"
           required
         />
         <button
