@@ -5,7 +5,7 @@ import { addBook } from '../redux/Books/books';
 
 const AddBook = () => {
   const dispatch = useDispatch();
-  const [book, setBook] = useState({ title: '', author: '' });
+  const [book, setBook] = useState({ title: '', author: '', id: `${Date.now()}` });
   const handleChange = (e) => {
     const inputs = e.target.name;
     if (inputs === 'title') {
