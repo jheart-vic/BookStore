@@ -64,9 +64,9 @@ const AddBook = () => {
         <input
           type="text"
           name="category"
-          className="inputAuthor"
+          className="inputCategory"
           onChange={handleChange}
-          placeholder="category"
+          placeholder="Book category"
           id="input2"
           required
         />

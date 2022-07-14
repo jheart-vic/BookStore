@@ -66,6 +66,13 @@
   gap: 3px;
 }
 
+.line {
+  border-right: 1px solid #e8e8e8;
+  background-color: #e8e8e8;
+  width: 0.125rem;
+  height: 4.375rem;
+}
+
 .circular-progressbar {
   font-size: 2px;
   width: 60px;
@@ -95,6 +102,11 @@
   font-weight: 300;
   letter-spacing: -0.4px;
   color: #121212;
+}
+
+.content1SecondChild .removeBtn {
+  border-left: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
 }
 
 .updateBtn {
