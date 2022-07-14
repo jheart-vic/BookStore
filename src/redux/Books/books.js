@@ -1,41 +1,15 @@
-import axios from 'axios';
-
 const ADD_BOOK = './Books/ADD_BOOK';
 const REMOVE_BOOK = './Books/REMOVE_BOOK';
 const FETCH_BOOK = './Books/FETCH_BOOK';
 
-const InitialState = [{
-  id: '2',
-  title: 'The Hunger Games',
-  author: 'Suzanne Collins',
-  category: 'Action',
-},
-{
-  id: '3',
-  title: 'The Hunger Games',
-  author: 'Suzanne Collins',
-  category: 'Action',
-},
-];
-const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/q5Rf5ziWBignU2VPn4ba/books';
+const InitialState = [];
+
+const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/5jCFFvv4jZnTKL22CDg8/books';
 
 const BookReducer = (state = InitialState, action) => {
   switch (action.type) {
     case ADD_BOOK: {
-      const bookObjects = {
-        item_id: 'item 1',
-        title: action.book.title,
-        author: action.book.author,
-        category: action.book.category,
-      };
-      const newState = [{
-        id: `book${Date.now()}`,
-        title: action.book.title,
-        author: action.book.author,
-        category: action.book.category,
-      }];
-      axios.post(url, bookObjects);
-      return state.concat(newState);
+      return state.concat(action.book);
     }
 
     case REMOVE_BOOK: {
@@ -44,7 +18,7 @@ const BookReducer = (state = InitialState, action) => {
     }
 
     case FETCH_BOOK: {
-      return action.newBook;
+      return action.books;
     }
 
     default:
@@ -52,20 +26,52 @@ const BookReducer = (state = InitialState, action) => {
   }
 };
 
-export const addBook = (book) => ({ type: ADD_BOOK, book });
+export default BookReducer;
 
-export const removeBook = (id) => ({
-  type: REMOVE_BOOK,
-  id,
-});
-
-export const fetchBook = () => (dispatch) => {
-  axios.get(url).then((response) => {
-    const data = Object.entries(response.data);
+export const removeBook = (id) => async (dispatch) => {
+  const bookDelete = await fetch(`${url}/${id}`, { method: 'DELETE' });
+  const response = await bookDelete.text();
+  if (response) {
     dispatch({
-      type: FETCH_BOOK, newBook: data,
+      type: REMOVE_BOOK,
+      id,
     });
+  }
+};
+
+export const addBook = (book) => async (dispatch) => {
+  fetch(url,
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        item_id: book.id,
+        title: book.title,
+        author: book.author,
+        category: book.category,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+  dispatch({
+    type: ADD_BOOK,
+    book,
   });
 };
 
-export default BookReducer;
+export const getBooks = () => async (dispatch) => {
+  const response = await fetch(url);
+  const data = await response.json();
+  const entries = Object.entries(data);
+  const books = entries.map((element) => ({
+    id: element[0],
+    title: Object.assign(...element[1]).title,
+    author: Object.assign(...element[1]).author,
+    category: Object.assign(...element[1]).category,
+  }));
+
+  dispatch({
+    type: FETCH_BOOK,
+    books,
+  });
+};

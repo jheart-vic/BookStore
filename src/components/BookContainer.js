@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux/es/exports';
+import { useSelector, useDispatch } from 'react-redux';
 import Books from './Books';
-import { fetchBook } from '../redux/Books/books';
 import Category from './Category';
 import NavBar from './NavBar';
 import './Book.css';
+import { getBooks } from '../redux/Books/books';
 
 const BookContainer = () => {
+  const dispatch = useDispatch();
   const books = useSelector((state) => state.BookReducer);
-  useEffect(() => {
-    fetchBook();
-  }, []);
+  useEffect(
+    () => {
+      dispatch(getBooks());
+    },
+    [dispatch],
+  );
   return (
     <Router>
 
@@ -26,8 +30,4 @@ const BookContainer = () => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchBooks: () => dispatch(fetchBook()),
-});
-
-export default connect(mapDispatchToProps)(BookContainer);
+export default BookContainer;

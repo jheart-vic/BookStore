@@ -4,12 +4,12 @@ import Book from './Book';
 import AddBook from './AddBook';
 
 const Books = ({ books }) => (
-  <>
+  <div>
     <ul className="book-content">
       {books.map((book) => <Book key={book.id} book={book} />)}
     </ul>
     <AddBook />
-  </>
+  </div>
 );
 
 Books.propTypes = {

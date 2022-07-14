@@ -1,21 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './AddBook.css';
+import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import { addBook } from '../redux/Books/books';
 
 const AddBook = () => {
   const dispatch = useDispatch();
-  const [book, setBook] = useState({ title: '', author: '' });
+  let title = '';
+  let author = '';
+  let category = '';
+
+  const clearInput = () => {
+    setTimeout(() => {
+      title = '';
+      author = '';
+      category = '';
+    });
+  };
+
+  const submitBook = (e) => {
+    e.preventDefault();
+    dispatch(addBook({
+      id: String(uuidv4()), title, author, category,
+    }));
+    clearInput();
+  };
+
   const handleChange = (e) => {
-    const inputs = e.target.name;
-    if (inputs === 'title') {
-      setBook({ title: e.target.value, author: book.author });
+    const inputValue = e.target.name;
+    if (inputValue === 'title') {
+      title = e.target.value;
     }
-    if (inputs === 'author') {
-      setBook({ title: book.title, author: e.target.value });
+    if (inputValue === 'author') {
+      author = e.target.value;
     }
-    if (inputs === 'catgory') {
-      setBook({ title: book.title, author: e.target.value });
+    if (inputValue === 'category') {
+      category = e.target.value;
     }
   };
 
@@ -53,10 +73,7 @@ const AddBook = () => {
         <button
           type="submit"
           className="FormBtn"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(addBook(book));
-          }}
+          onClick={submitBook}
         >
           Add Book
         </button>
